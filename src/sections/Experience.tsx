@@ -25,7 +25,7 @@ const experienceData = [
   {
     id: 3,
     title: "Full-Stack Developer Intern",
-    company: "Communication And Informatics Service Department Of Kebumen City",
+    company: "Department of Communication and Information",
     startDate: "June 2025",
     endDate: "August 2025",
   },
@@ -35,6 +35,20 @@ const experienceData = [
     company: "Telkom University",
     startDate: "October 2025",
     endDate: "December 2025",
+  },
+  {
+    id: 5,
+    title: "Full-Stack Developer",
+    company: "Makers Institute",
+    startDate: "April 2026",
+    endDate: "September 2026",
+  },
+  {
+    id: 6,
+    title: "AI Engineer Cohort",
+    company: "DBS",
+    startDate: "February 2026",
+    endDate: "July 2026",
   },
 ];
 

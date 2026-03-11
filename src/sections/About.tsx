@@ -152,7 +152,7 @@ const About: React.FC<{ isDark: boolean }> = ({ isDark }) => {
             </div>
 
             <a
-              href="https://drive.google.com/file/d/1Cv3zVhNLB2LqpOJi-q_lIHAZkIR1qKVS/view?usp=sharing"
+              href="https://drive.google.com/file/d/1Rl_oj6snbmubc4nY-bkw157f4QCBhw9J/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer">
               <motion.button
