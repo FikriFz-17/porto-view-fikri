@@ -46,7 +46,7 @@ const experienceData = [
   {
     id: 6,
     title: "AI Engineer Cohort",
-    company: "DBS",
+    company: "DBS Indonesia by Dicoding",
     startDate: "February 2026",
     endDate: "July 2026",
   },
