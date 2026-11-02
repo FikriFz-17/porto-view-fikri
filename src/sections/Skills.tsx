@@ -127,14 +127,15 @@ const Skills: React.FC<{ isDark: boolean }> = ({ isDark }) => {
             initial="hidden"
             whileInView="visible"
             className="grid grid-cols-3 sm:flex sm:flex-wrap justify-center gap-x-4 gap-y-12 sm:gap-10">
-            {skills.map((skill, index) => (
-              <SkillCard
-                key={index}
-                skill={skill}
-                isDark={isDark}
-                index={index}
-              />
-            ))}
+            {Array.isArray(skills) &&
+              skills.map((skill, index) => (
+                <SkillCard
+                  key={skill.uuid || index}
+                  skill={skill}
+                  isDark={isDark}
+                  index={index}
+                />
+              ))}
           </motion.div>
         )}
       </div>

@@ -6,17 +6,21 @@ import { Github, Eye, Building2, Calendar } from "lucide-react";
 
 // --- Types ---
 export interface Project {
-  id: number;
+  id?: number | string;
+  uuid?: string;
   title: string;
-  company: string;
+  company?: string;
   description: string;
-  tech_stack: string[];
-  category: string[];
-  start_date: string;
-  end_date: string;
+  tech_stack?: string[];
+  techstack?: string[];
+  category?: string[];
+  start_date?: string;
+  end_date?: string;
   image_url: string;
-  repo_url: string;
-  live_url: string;
+  repo_url?: string;
+  repo?: string;
+  live_url?: string;
+  link?: string;
 }
 
 const itemVariants: Variants = {
@@ -34,6 +38,9 @@ const ProjectCard: React.FC<{ project: Project; isDark: boolean }> = ({
   isDark,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const techStack = project.tech_stack || project.techstack || [];
+  const liveUrl = project.live_url || project.link;
+  const repoUrl = project.repo_url || project.repo;
 
   return (
     <motion.div
@@ -118,7 +125,7 @@ const ProjectCard: React.FC<{ project: Project; isDark: boolean }> = ({
           </div>
 
           <div className="flex flex-wrap gap-2 mb-6">
-            {project.tech_stack.map((tech, index) => (
+            {techStack.map((tech, index) => (
               <span
                 key={index}
                 className={`px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider border ${
@@ -133,9 +140,9 @@ const ProjectCard: React.FC<{ project: Project; isDark: boolean }> = ({
 
           <div className="mt-auto grid grid-cols-2 gap-3 z-10">
             {/* Link Live View */}
-            {project.live_url ? (
+            {liveUrl ? (
               <a
-                href={project.live_url}
+                href={liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`flex items-center justify-center gap-2 py-2 px-3 rounded text-xs font-bold transition-all duration-300 ${
@@ -157,9 +164,9 @@ const ProjectCard: React.FC<{ project: Project; isDark: boolean }> = ({
             )}
 
             {/* Link Repository / Code */}
-            {project.repo_url ? (
+            {repoUrl ? (
               <a
-                href={project.repo_url}
+                href={repoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`flex items-center justify-center gap-2 py-2 px-3 rounded text-xs font-bold transition-all duration-300 ${

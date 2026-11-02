@@ -43,6 +43,7 @@ const photoVariants: Variants = {
 // Data sosial media (tanpa logika string isDark agar tidak error)
 const socialLinks = [
   {
+    name: "GitHub",
     Icon: Github,
     href: "https://github.com/FikriFz-17",
     brandColor: "hover:text-white",
@@ -50,6 +51,7 @@ const socialLinks = [
     brandBg: "hover:bg-white/10",
   },
   {
+    name: "LinkedIn",
     Icon: Linkedin,
     href: "https://www.linkedin.com/in/fikri-fauzi-a08588258/",
     brandColor: "hover:text-[#0077b5]",
@@ -57,6 +59,7 @@ const socialLinks = [
     brandBg: "hover:bg-[#0077b5]/10",
   },
   {
+    name: "Instagram",
     Icon: Instagram,
     href: "https://www.instagram.com/fikrisyoru/",
     brandColor: "hover:text-[#e1306c]",
@@ -134,8 +137,11 @@ const Hero = ({ isDark }: HeroProps) => {
             <motion.h1
               variants={itemVariants}
               className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight">
-              I'm <span className="text-orange-500">Fikri</span>{" "}
-              <span className={isDark ? "text-slate-100" : "text-orange-600"}>
+              I'm{" "}
+              <span className={isDark ? "text-orange-400" : "text-orange-700"}>
+                Fikri
+              </span>{" "}
+              <span className={isDark ? "text-slate-100" : "text-orange-700"}>
                 Fauzi
               </span>
             </motion.h1>
@@ -143,7 +149,7 @@ const Hero = ({ isDark }: HeroProps) => {
               variants={itemVariants}
               className="text-lg sm:text-xl md:text-2xl font-semibold flex items-center justify-center md:justify-start gap-2">
               <span className="opacity-80">I Am Into</span>{" "}
-              <span className="text-red-500">
+              <span className={isDark ? "text-red-400" : "text-red-600"}>
                 <Typewriter
                   words={["Machine Learning", "Web Developer", "AI Engineer"]}
                   loop={0}
@@ -174,7 +180,7 @@ const Hero = ({ isDark }: HeroProps) => {
             variants={itemVariants}
             className="flex gap-4 pt-4 justify-center md:justify-start">
             {socialLinks.map(
-              ({ Icon, href, brandColor, brandBorder, brandBg }, i) => {
+              ({ name, Icon, href, brandColor, brandBorder, brandBg }, i) => {
                 // Logika khusus untuk Github di Mode Terang agar tetap hitam
                 const isGithub = i === 0;
                 const hoverStyles =
@@ -188,6 +194,8 @@ const Hero = ({ isDark }: HeroProps) => {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={`Visit my ${name} profile`}
+                    title={`Visit my ${name} profile`}
                     whileHover={{ y: -4, scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                     className={`p-3 rounded-full transition-all duration-300 border border-transparent ${hoverStyles} ${

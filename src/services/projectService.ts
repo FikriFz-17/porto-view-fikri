@@ -5,8 +5,14 @@ import type { Project } from "../components/ProjectCard";
 
 export const getLatestProjects = async (): Promise<Project[]> => {
   try {
-    const { data } = await api.get<{ data: Project[] }>("/projects/latest");
-    return data.data || [];
+    const response = await api.get<{ data?: Project[] } | Project[]>("/projects/latest");
+    if (Array.isArray(response.data)) {
+      return response.data;
+    }
+    if (response.data && Array.isArray(response.data.data)) {
+      return response.data.data;
+    }
+    return [];
   } catch (error: unknown) {
     let msg = "Gagal mengambil data proyek";
     if (isAxiosError(error)) {

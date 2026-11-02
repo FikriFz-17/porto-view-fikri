@@ -51,9 +51,12 @@ export default function Projects({ isDark }: { isDark: boolean }) {
             initial="hidden"
             whileInView="visible"
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Filter hanya 6 project terbaru untuk ditampilkan di landing page */}
-            {projects.slice(0, 6).map((project) => (
-              <ProjectCard key={project.id} project={project} isDark={isDark} />
+            {projects.slice(0, 6).map((project, index) => (
+              <ProjectCard
+                key={project.uuid || project.id || index}
+                project={project}
+                isDark={isDark}
+              />
             ))}
           </motion.div>
         )}

@@ -151,17 +151,16 @@ const About: React.FC<{ isDark: boolean }> = ({ isDark }) => {
               </p>
             </div>
 
-            <a
+            <motion.a
               href="https://drive.google.com/file/d/1Rl_oj6snbmubc4nY-bkw157f4QCBhw9J/view?usp=sharing"
               target="_blank"
-              rel="noopener noreferrer">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white px-8 py-4 rounded-xl font-bold shadow-lg shadow-blue-700/30 transition-all mt-6">
-                Download CV <ChevronRight size={20} />
-              </motion.button>
-            </a>
+              rel="noopener noreferrer"
+              aria-label="Download Curriculum Vitae"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white px-8 py-4 rounded-xl font-bold shadow-lg shadow-blue-700/30 transition-all mt-6 cursor-pointer">
+              Download CV <ChevronRight size={20} />
+            </motion.a>
           </motion.div>
         </div>
       </div>

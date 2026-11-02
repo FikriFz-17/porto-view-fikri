@@ -29,8 +29,11 @@ export const useAllProjects = () => {
           setTotalPages(lastPage);
 
           if (categories.length === 0 && data.length > 0) {
-            const extracted = data.flatMap((p: Project) => p.category || []);
-            // Perbaikan: Pastikan hasil Set adalah string[]
+            const extracted = data.flatMap((p: Project) => {
+              if (Array.isArray(p.category)) return p.category;
+              if (typeof p.category === "string") return (p.category as string).split(" ").filter(Boolean);
+              return [];
+            });
             const uniqueCategories = [
               "All Projects",
               ...(Array.from(new Set(extracted)) as string[]),

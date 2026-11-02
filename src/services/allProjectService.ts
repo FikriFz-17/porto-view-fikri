@@ -9,29 +9,46 @@ export interface GetAllProjectsResponse {
 }
 
 export const getAllProjects = async (page: number = 1, category?: string) => {
-    try {
-        const isFilter = category && category !== "All Projects";
-        const endpoint = isFilter ? "/projects/filter" : "/projects";
+  try {
+    const response = await api.get("/projects", {
+      params: {
+        page: page,
+        limit: 9,
+      },
+    });
 
-        const response = await api.get(endpoint, {
-          params: {
-            page: page,
-            ...(isFilter && { "category[]": category }),
-          },
-        });
+    const rawData = response.data;
+    const rawProjects: Project[] = Array.isArray(rawData?.data)
+      ? rawData.data
+      : Array.isArray(rawData?.data?.data)
+      ? rawData.data.data
+      : [];
 
-        const projects = response.data.data.data || response.data.data || [];
-        const lastPage = response.data.data.last_page || response.data.last_page || 1;
+    const meta = rawData?.meta;
+    const lastPage =
+      meta?.total_pages ||
+      rawData?.data?.last_page ||
+      rawData?.last_page ||
+      1;
 
-        return { projects, lastPage };
-    } catch (error : unknown) {
-        let msg = "Gagal mengambil data proyek";
+    const isFilter = category && category !== "All Projects";
+    const filteredProjects = isFilter
+      ? rawProjects.filter((p) =>
+          Array.isArray(p.category)
+            ? p.category.includes(category)
+            : p.category === category
+        )
+      : rawProjects;
 
-        if (isAxiosError(error)) {
-          msg = error.response?.data?.message || error.message;
-        }
+    return { projects: filteredProjects, lastPage };
+  } catch (error: unknown) {
+    let msg = "Gagal mengambil data proyek";
 
-        console.error("API Error:", msg);
-        return { projects: [], lastPage: 1 };
+    if (isAxiosError(error)) {
+      msg = error.response?.data?.message || error.message;
     }
-}
+
+    console.error("API Error:", msg);
+    return { projects: [], lastPage: 1 };
+  }
+};

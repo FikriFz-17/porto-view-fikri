@@ -82,7 +82,9 @@ const Navbar = ({
             })}
             <button
               onClick={() => setIsDark(!isDark)}
-              className="p-2 rounded-full">
+              className="p-2 rounded-full cursor-pointer"
+              aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+              title={isDark ? "Switch to light theme" : "Switch to dark theme"}>
               {isDark ? (
                 <Sun size={18} className="text-yellow-400" />
               ) : (
@@ -92,14 +94,21 @@ const Navbar = ({
           </div>
 
           <div className="md:hidden flex gap-2">
-            <button onClick={() => setIsDark(!isDark)}>
+            <button
+              onClick={() => setIsDark(!isDark)}
+              className="p-1 cursor-pointer"
+              aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+              title={isDark ? "Switch to light theme" : "Switch to dark theme"}>
               {isDark ? (
                 <Sun size={20} className="text-yellow-400" />
               ) : (
                 <Moon size={20} />
               )}
             </button>
-            <button onClick={() => setIsOpen(true)}>
+            <button
+              onClick={() => setIsOpen(true)}
+              className="p-1 cursor-pointer"
+              aria-label="Open navigation menu">
               <Menu
                 size={24}
                 className={isDark ? "text-white" : "text-gray-800"}
@@ -113,7 +122,10 @@ const Navbar = ({
       <div
         className={`fixed top-0 right-0 h-full w-64 z-100 transition-transform duration-300 ${isOpen ? "translate-x-0" : "translate-x-full"} ${isDark ? "bg-[#0f172a]" : "bg-white"}`}>
         <div className="flex justify-end p-4">
-          <button onClick={() => setIsOpen(false)}>
+          <button
+            onClick={() => setIsOpen(false)}
+            className="p-1 cursor-pointer"
+            aria-label="Close navigation menu">
             <X size={24} className={isDark ? "text-white" : "text-gray-800"} />
           </button>
         </div>

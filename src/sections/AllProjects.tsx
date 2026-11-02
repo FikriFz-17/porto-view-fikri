@@ -72,9 +72,9 @@ export default function AllProjectsPage({ isDark }: { isDark: boolean }) {
               layout
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <AnimatePresence mode="popLayout">
-                {projects.map((project) => (
+                {projects.map((project, index) => (
                   <motion.div
-                    key={project.id}
+                    key={project.uuid || project.id || index}
                     layout
                     initial={{ opacity: 0, scale: 0.8, y: 20 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -110,6 +110,7 @@ export default function AllProjectsPage({ isDark }: { isDark: boolean }) {
             <button
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((p) => p - 1)}
+              aria-label="Previous page"
               className={`p-3 rounded-full border-2 transition-all ${
                 currentPage === 1
                   ? "opacity-20 cursor-not-allowed border-slate-500"
@@ -128,6 +129,7 @@ export default function AllProjectsPage({ isDark }: { isDark: boolean }) {
             <button
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage((p) => p + 1)}
+              aria-label="Next page"
               className={`p-3 rounded-full border-2 transition-all ${
                 currentPage === totalPages
                   ? "opacity-20 cursor-not-allowed border-slate-500"
